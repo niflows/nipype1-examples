@@ -23,7 +23,7 @@ def run_examples(example, pipelines, data_path, plugin=None, rm_base_dir=True):
         plugin_args['n_procs'] = int(
             os.getenv('NIPYPE_NUMBER_OF_CPUS', cpu_count()))
 
-    module = import_module('niflow.nipype1.examples.' + example)
+    module = import_module('.' + example, 'niflow.nipype1.examples')
     for pipeline in pipelines:
         wf = getattr(module, pipeline)
         wf.base_dir = os.path.join(os.getcwd(), 'output', example, plugin)
