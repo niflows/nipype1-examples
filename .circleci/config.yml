@@ -86,9 +86,6 @@ jobs:
       - checkout:
           path: /home/circleci/niflow
       - run: *set_pr_number
-      - run: *generate_dockerfiles
-      - run: *modify_nipype_version
-      - run: *get_base_image
       - run: *build_main_image_py36
       - run: *_get_codecov
       - run: *_download_test_data
@@ -118,9 +115,6 @@ jobs:
       - checkout:
           path: /home/circleci/niflow
       - run: *set_pr_number
-      - run: *generate_dockerfiles
-      - run: *modify_nipype_version
-      - run: *get_base_image
       - run: *build_main_image_py36
       - run: *_get_codecov
       - run: *_download_test_data
@@ -145,9 +139,6 @@ jobs:
       - checkout:
           path: /home/circleci/niflow
       - run: *set_pr_number
-      - run: *generate_dockerfiles
-      - run: *modify_nipype_version
-      - run: *get_base_image
       - run: *build_main_image_py36
       - run: *build_main_image_py27
       - run: *_get_codecov
@@ -175,12 +166,6 @@ workflows:
   version: 2
   build_test_deploy:
     jobs:
-      - test_py3_fmri_fsl_spm:
-          requires:
-            - compare_base_dockerfiles
-      - test_py3_fmri_spm_dartel_multiproc:
-          requires:
-            - compare_base_dockerfiles
-      - test_fmri_spm_nested_fsl_feeds:
-          requires:
-            - compare_base_dockerfiles
+      - test_py3_fmri_fsl_spm
+      - test_py3_fmri_spm_dartel_multiproc
+      - test_fmri_spm_nested_fsl_feeds
