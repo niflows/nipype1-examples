@@ -1,9 +1,6 @@
 _machine_kwds: &machine_kwds
   image: circleci/classic:201808-01
 
-_store_artifacts_kwds: &store_artifacts_kwds
-  path: /home/circleci/work/tests
-
 _test_environment: &test_environment
   WORKDIR: /home/circleci/work
   DOCKER_IMAGE: "niflow"
@@ -108,7 +105,6 @@ jobs:
           environment: *test_environment
           command: bash -ux /home/circleci/niflow/.circleci/test_py3_fmri_spm_linear_4d.sh
       - run: *_run_codecov_smoke
-      - store_artifacts: *store_artifacts_kwds
 
   test_py3_fmri_spm_dartel_multiproc:
     machine: *machine_kwds
@@ -132,7 +128,6 @@ jobs:
           environment: *test_environment
           command: bash -ux /home/circleci/niflow/.circleci/test_py3_fmri_spm_dartel_multiproc_l2.sh
       - run: *_run_codecov_smoke
-      - store_artifacts: *store_artifacts_kwds
 
   test_fmri_spm_nested_fsl_feeds:
     machine: *machine_kwds
@@ -162,7 +157,6 @@ jobs:
           environment: *test_environment
           command: bash -ux /home/circleci/niflow/.circleci/test_py3_fmri_fsl_feeds_linear_l1.sh
       - run: *_run_codecov_smoke
-      - store_artifacts: *store_artifacts_kwds
 
 workflows:
   version: 2
