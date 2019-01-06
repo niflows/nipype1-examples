@@ -23,6 +23,7 @@ _build_main_image_py36: &build_main_image_py36
       docker build \
         --rm=false \
         --tag niflow:py36 \
+        --file .circleci/Dockerfile \
         --build-arg BUILD_DATE="$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
         --build-arg VCS_REF="$(git rev-parse --short HEAD)" \
         --build-arg VERSION="${CIRCLE_TAG}" /home/circleci/niflow
@@ -37,6 +38,7 @@ _build_main_image_py27: &build_main_image_py27
         --tag niflow:py27 \
         --build-arg PYTHON_VERSION_MAJOR=2 \
         --build-arg PYTHON_VERSION_MINOR=7 \
+        --file .circleci/Dockerfile \
         --build-arg BUILD_DATE="$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
         --build-arg VCS_REF="$(git rev-parse --short HEAD)" \
         --build-arg VERSION="${CIRCLE_TAG}-py27" /home/circleci/niflow
