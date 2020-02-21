@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import sys
+import argparse
 from shutil import rmtree
 from multiprocessing import cpu_count
 from importlib import import_module
@@ -59,8 +60,11 @@ def run_examples(example, pipelines, data_path, plugin=None, rm_base_dir=True):
 
 
 def main():
-    example = sys.argv[1]
-    plugin = sys.argv[2]
-    data_path = sys.argv[3]
-    pipelines = sys.argv[4:]
-    run_examples(example, pipelines, data_path, plugin)
+    parser = argparse.ArgumentParser(description="Run example worklow")
+    parser.add_argument('example', type=str, help="name of example workflow")
+    parser.add_argument('plugin', type=str, help="execution plugin")
+    parser.add_argument('data_path', type=str, help="path to input data")
+    parser.add_argument('pipeline', type=str, nargs="+",
+                        help="name of pipelines to run")
+    opts = parser.parse_args()
+    run_examples(opts.example, opts.pipeline, opts.data_path, opts.plugin)
