@@ -26,9 +26,8 @@ A data package containing the outputs of this pipeline can be obtained from here
 
     * http://db.tt/1vx4vLeP
 
-Along with `Camino <http://web4.cs.ucl.ac.uk/research/medic/camino/pmwiki/pmwiki.php?n=Main.HomePage>`_,
-`Camino-Trackvis <http://www.nitrc.org/projects/camino-trackvis/>`_, `FSL <http://www.fmrib.ox.ac.uk/fsl/>`_,
-and `Freesurfer <http://surfer.nmr.mgh.harvard.edu/>`_, you must also have the Connectome File Format
+Along with Camino_, Camino2Trackvis_, FSL_, and FreeSurfer_,
+you must also have the Connectome File Format
 library installed as well as the Connectome Mapper.
 
 These are written by Stephan Gerhard and can be obtained from:
@@ -73,10 +72,9 @@ regions.
 
 def get_vox_dims(volume):
     import nibabel as nb
-    from nipype.utils import NUMPY_MMAP
     if isinstance(volume, list):
         volume = volume[0]
-    nii = nb.load(volume, mmap=NUMPY_MMAP)
+    nii = nb.load(volume)
     hdr = nii.header
     voxdims = hdr.get_zooms()
     return [float(voxdims[0]), float(voxdims[1]), float(voxdims[2])]
@@ -84,10 +82,9 @@ def get_vox_dims(volume):
 
 def get_data_dims(volume):
     import nibabel as nb
-    from nipype.utils import NUMPY_MMAP
     if isinstance(volume, list):
         volume = volume[0]
-    nii = nb.load(volume, mmap=NUMPY_MMAP)
+    nii = nb.load(volume)
     hdr = nii.header
     datadims = hdr.get_data_shape()
     return [int(datadims[0]), int(datadims[1]), int(datadims[2])]
@@ -95,8 +92,7 @@ def get_data_dims(volume):
 
 def get_affine(volume):
     import nibabel as nb
-    from nipype.utils import NUMPY_MMAP
-    nii = nb.load(volume, mmap=NUMPY_MMAP)
+    nii = nb.load(volume)
     return nii.affine
 
 
