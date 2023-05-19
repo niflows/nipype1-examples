@@ -17,11 +17,13 @@ from nipype.interfaces.base import (BaseInterfaceInputSpec, File,
                                     SimpleInterface, TraitedSpec, traits)
 from nipype.pipeline import engine as pe
 
-# First, let's start by creating a simple interface to use in our workflow.
-# The WriteString interface just writes a string to a file.
+"""
+First, let's start by creating a simple interface to use in our workflow.
+The WriteString interface just writes a string to a file.
+"""
 
 
-class _WriteStringInputSpec(BaseInterfaceInputSpec):
+class _WriteStringInputSpec(TraitedSpec):
     in_str = traits.Str(mandatory=True)
 
 
